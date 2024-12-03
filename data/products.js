@@ -657,4 +657,38 @@ const products = [
       "mens"
     ]
   }
+  ,
+  {
+    id: "id1",
+    image: "images/products/backpack.jpg",
+    name: "Full size back with water proof zip",
+    rating: {
+      stars: 4.5,
+      count: 3157
+    },
+    priceCents: 3300,
+    keywords: [
+      "back",
+      "purse",
+      "apparel",
+      "mens"
+    ]
+  }
+  ,
+  {
+    id: "id2",
+    image: "images/products/umbrella.jpg",
+    name: "Rain and Sun protection Umbrella",
+    rating: {
+      stars: 4,
+      count: 3157
+    },
+    priceCents: 2000,
+    keywords: [
+      "sweaters",
+      "hoodies",
+      "apparel",
+      "mens"
+    ]
+  }
 ];
