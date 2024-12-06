@@ -1,5 +1,5 @@
 import { formatCurrency } from './utils/money.js';
-import { cart, addToCart } from '../data/cart.js';
+import { cart, addToCart, claculateCartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 let productsHtml= '';
 products.forEach((product)=>
@@ -58,16 +58,14 @@ products.forEach((product)=>
 
  document.querySelector('.js-products-grid').innerHTML = productsHtml;
  
- //This function will allows us to update the products into the cart.
-
+ 
+  //This function will allows us to update the products into the cart.
  function updateCartQuantity(){
-  let cartQuantity = 0 ;
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  let cartQuantity = claculateCartQuantity();
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
  }
-
+ //By calling this function here it will show the cart quantity into basket whenever the page loads.
+ updateCartQuantity();
  document.querySelectorAll('.js-add-to-cart')
  .forEach((button) => {
   
