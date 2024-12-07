@@ -106,6 +106,6 @@ cart.forEach((cartItem) => {
   });
 function updateCartQuantity(){
   const cartQuantity =claculateCartQuantity();
-    document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+  document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
  }
  updateCartQuantity();
