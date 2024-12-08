@@ -51,7 +51,7 @@ export function addToCart(productId, quantity) {
   saveToStorage();
  }
 //This function will allows us to update the products into the cart.
- export function claculateCartQuantity(){
+ export function calculateCartQuantity(){
   let cartQuantity = 0 ;
 
     cart.forEach((cartItem) => {
@@ -71,5 +71,16 @@ export function addToCart(productId, quantity) {
   matchingItem.quantity = newQuantity;
 
   saveToStorage();
+}
+export function updateDeliveryOption(productId, deliverOptionId){
+  let matchingItem;
+    cart.forEach((cartItem) => {
+      if(productId === cartItem.productId)
+      {
+        matchingItem = cartItem;
+      }
+    });
+    matchingItem.deliverOptionId = deliverOptionId;
+    saveToStorage();
 }
  
