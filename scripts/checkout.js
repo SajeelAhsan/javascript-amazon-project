@@ -92,7 +92,9 @@ function deliveryOptionsHTML(matchingProduct, cartItem){
     const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
   html += `
-  <div class="delivery-option js-delivery-option">
+  <div class="delivery-option js-delivery-option"
+  data-product-id="${matchingProduct.id}"
+  data-delivery-option-id="${deliveryOption.id}">
       <input type="radio"
       ${isChecked ? 'checked' : ''}
         class="delivery-option-input"
@@ -125,16 +127,24 @@ function deliveryOptionsHTML(matchingProduct, cartItem){
   });
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
-      const productId = element.querySelector('input[type="radio"]')
-        .name.replace('delivery-option-', '');
-      
-      const deliveryOptionId = deliveryOptions[
-        Array.from(element.parentNode.children).indexOf(element)
-      ].id;
-
+      const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
+      
+      // Regenerate the cart HTML to update the delivery date
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      const cartItem = cart.find(item => item.productId === productId);
+      const matchingProduct = products.find(product => product.id === productId);
+      
+      // Update the delivery date display
+      const deliveryOption = deliveryOptions.find(option => option.id === deliveryOptionId);
+      const today = dayjs();
+      const deliveryDate = today.add(Number(deliveryOption.deliveryDays), 'days');
+      const dateString = deliveryDate.format('dddd, MMMM D');
+      
+      container.querySelector('.delivery-date').innerHTML = `Delivery date: ${dateString}`;
     });
   }); 
+  
 function updateCartQuantity(){
   const cartQuantity =calculateCartQuantity();
   document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
@@ -152,8 +162,6 @@ function updateCartQuantity(){
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
-
-      
       const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
       const newQuantity = Number(quantityInput.value);
       
@@ -161,7 +169,6 @@ function updateCartQuantity(){
         alert('Quantity must be at least 0 and less than 1000');
         return;
       }
-      
 
       updateQuantity(productId, newQuantity);
 
