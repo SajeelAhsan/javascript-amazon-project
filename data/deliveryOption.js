@@ -15,3 +15,13 @@
     deliveryPrice: 999
   }
 ];
+export function getDeliveryOption(deliveryOptionId){
+  let deliveryOption;
+deliveryOptions.forEach((option) => {
+if(option.id === deliveryOptionId) {
+deliveryOption = option;
+//console.log('Found delivery option:', option);
+}
+});
+return deliveryOption || deliveryOption[0];
+}

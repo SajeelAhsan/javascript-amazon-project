@@ -1,38 +1,27 @@
 import { formatCurrency } from '../utils/money.js';
 import { cart, calculateCartQuantity, removeFromCart, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
-import { deliveryOptions } from '../../data/deliveryOption.js';
+import { products, getProduct } from '../../data/products.js';
+
+import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 export function renderOrderSummary() {
 let cartSummaryHtml = '';
 cart.forEach((cartItem) => {
 const productId = cartItem.productId;
-let matchingProduct;
-products.forEach((product) => {
-if(product.id === productId){
-matchingProduct = product;
-}
-});
-
+const matchingProduct = getProduct(productId);
 // Add error checking
 if (!matchingProduct) {
   console.error(`Product not found for ID: ${productId}`);
   return;
 }
 const deliveryOptionId = cartItem.deliveryOptionId;
-let deliveryOption;
-deliveryOptions.forEach((option) => {
-if(option.id === deliveryOptionId) {
-deliveryOption = option;
-console.log('Found delivery option:', option);
-}
-});
-console.log('Delivery Option ID:', deliveryOptionId);
-console.log('Selected delivery option:', deliveryOption);
+const deliveryOption = getDeliveryOption(deliveryOptionId);
+//console.log('Delivery Option ID:', deliveryOptionId);
+//console.log('Selected delivery option:', deliveryOption);
 if (!deliveryOption) {
 deliveryOption = deliveryOptions[0];
-console.log('No delivery option found, using default:', deliveryOption);
+//console.log('No delivery option found, using default:', deliveryOption);
 }
 const today = dayjs();
 const deliveryDate = today.add(Number(deliveryOption.deliveryDays), 'days');
