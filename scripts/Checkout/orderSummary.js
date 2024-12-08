@@ -1,7 +1,7 @@
 import { formatCurrency } from '../utils/money.js';
 import { cart, calculateCartQuantity, removeFromCart, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
-
+import { renderPaymentSummary } from './paymentSummary.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
@@ -111,12 +111,16 @@ const container = document.querySelector(
   `.js-cart-item-container-${productId}`);
   container.remove();
   updateCartQuantity();
+  renderPaymentSummary();
   });
 });
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
 element.addEventListener('click', () => {
 const {productId, deliveryOptionId} = element.dataset;
 updateDeliveryOption(productId, deliveryOptionId);
+//renderOrderSummary();
+renderPaymentSummary();
+
 //Regenerate the cart HTML to update the delivery date
 const container = document.querySelector(`.js-cart-item-container-${productId}`);
 // Update the delivery date display
