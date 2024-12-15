@@ -107,10 +107,11 @@ document.querySelectorAll('.js-delete-link')
 link.addEventListener('click' , () => {
 const productId = link.dataset.productId;
 removeFromCart(productId);
-const container = document.querySelector(
+/*const container = document.querySelector(
   `.js-cart-item-container-${productId}`);
-  container.remove();
+  container.remove();*/
   updateCartQuantity();
+  renderOrderSummary();
   renderPaymentSummary();
   });
 });
@@ -123,7 +124,7 @@ updateDeliveryOption(productId, deliveryOptionId);
 
 //renderOrderSummary();
 renderPaymentSummary();
-console.log(renderPaymentSummary());
+
 
 
 //Regenerate the cart HTML to update the delivery date
