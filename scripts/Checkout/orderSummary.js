@@ -2,7 +2,8 @@ import { formatCurrency } from '../utils/money.js';
 import { cart, calculateCartQuantity, removeFromCart, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
 import { renderPaymentSummary } from './paymentSummary.js';
-import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
+import { deliveryOptions, calculateDeliveryDate, getDeliveryOption } from '../../data/deliveryOption.js';
+import { renderCheckoutHeader } from './checkoutHeader.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 export function renderOrderSummary() {
@@ -72,9 +73,10 @@ cartSummaryHtml += `
 function deliveryOptionsHTML(matchingProduct, cartItem){
 let html = '';
 deliveryOptions.forEach((deliveryOption) => {
-const today = dayjs();
+/*const today = dayjs();
 const deliveryDate = today.add(Number(deliveryOption.deliveryDays), 'days');
-const dateString = deliveryDate.format('dddd, MMMM D');
+const dateString = deliveryDate.format('dddd, MMMM D');*/
+const dateString = calculateDeliveryDate(deliveryOption);
 const priceString = deliveryOption.deliveryPrice
 === 0
 ? 'FREE'
@@ -110,9 +112,12 @@ removeFromCart(productId);
 /*const container = document.querySelector(
   `.js-cart-item-container-${productId}`);
   container.remove();*/
+  
   updateCartQuantity();
+  
   renderOrderSummary();
   renderPaymentSummary();
+  renderCheckoutHeader();
   });
 });
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
@@ -131,9 +136,10 @@ renderPaymentSummary();
 const container = document.querySelector(`.js-cart-item-container-${productId}`);
 // Update the delivery date display
 const deliveryOption = deliveryOptions.find(option => option.id === deliveryOptionId);
-const today = dayjs();
+/*const today = dayjs();
 const deliveryDate = today.add(Number(deliveryOption.deliveryDays), 'days');
-const dateString = deliveryDate.format('dddd, MMMM D');
+const dateString = deliveryDate.format('dddd, MMMM D');*/
+const dateString = calculateDeliveryDate(deliveryOption);
 container.querySelector('.delivery-date').innerHTML = `Delivery date: ${dateString}`;
   });
 });
