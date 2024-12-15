@@ -23,5 +23,5 @@ deliveryOption = option;
 //console.log('Found delivery option:', option);
 }
 });
-return deliveryOption || deliveryOption[0];
+return deliveryOption || deliveryOption[deliveryPrice];
 }

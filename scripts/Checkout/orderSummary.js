@@ -16,7 +16,7 @@ if (!matchingProduct) {
   return;
 }
 const deliveryOptionId = cartItem.deliveryOptionId;
-const deliveryOption = getDeliveryOption(deliveryOptionId);
+let deliveryOption = getDeliveryOption(deliveryOptionId);
 //console.log('Delivery Option ID:', deliveryOptionId);
 //console.log('Selected delivery option:', deliveryOption);
 if (!deliveryOption) {
@@ -117,9 +117,14 @@ const container = document.querySelector(
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
 element.addEventListener('click', () => {
 const {productId, deliveryOptionId} = element.dataset;
+
+
 updateDeliveryOption(productId, deliveryOptionId);
+
 //renderOrderSummary();
 renderPaymentSummary();
+console.log(renderPaymentSummary());
+
 
 //Regenerate the cart HTML to update the delivery date
 const container = document.querySelector(`.js-cart-item-container-${productId}`);
@@ -130,7 +135,7 @@ const deliveryDate = today.add(Number(deliveryOption.deliveryDays), 'days');
 const dateString = deliveryDate.format('dddd, MMMM D');
 container.querySelector('.delivery-date').innerHTML = `Delivery date: ${dateString}`;
   });
-}); 
+});
 function updateCartQuantity(){
 const cartQuantity =calculateCartQuantity();
 document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
