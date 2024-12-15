@@ -17,14 +17,15 @@
   }
 ];
 export function getDeliveryOption(deliveryOptionId){
-  let deliveryOption;
+ /* let deliveryOption;
 deliveryOptions.forEach((option) => {
 if(option.id === deliveryOptionId) {
 deliveryOption = option;
 //console.log('Found delivery option:', option);
 }
 });
-return deliveryOption || deliveryOption[1];
+return deliveryOption || deliveryOption[deliveryOptionId];*/
+return deliveryOptions.find(option => option.id === deliveryOptionId) || null;
 }
 function isWeekend(date) {
   const dayOfWeek = date.format('dddd');
