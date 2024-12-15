@@ -24,7 +24,7 @@ deliveryOption = option;
 //console.log('Found delivery option:', option);
 }
 });
-return deliveryOption || deliveryOption[deliveryPrice];
+return deliveryOption || deliveryOption[1];
 }
 function isWeekend(date) {
   const dayOfWeek = date.format('dddd');
