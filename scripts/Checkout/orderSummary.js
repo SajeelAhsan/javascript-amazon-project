@@ -115,10 +115,10 @@ removeFromCart(productId);
 /*const container = document.querySelector(
   `.js-cart-item-container-${productId}`);
 container.remove();*/
-  updateCartQuantity();
+  //renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
-  renderCheckoutHeader();
+  updateCartQuantity();
   });
 });
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
@@ -162,6 +162,8 @@ if (newQuantity < 0 || newQuantity >= 1000) {
   return;
 }
 updateQuantity(productId, newQuantity);
+renderOrderSummary();
+renderPaymentSummary();
 const container = document.querySelector(`.js-cart-item-container-${productId}`);
 container.classList.remove('is-editing-quantity');
 const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);

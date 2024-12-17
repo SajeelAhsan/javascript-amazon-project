@@ -4,5 +4,8 @@ import { renderPaymentSummary } from "./Checkout/paymentSummary.js";
 
 
 renderCheckoutHeader();
+
 renderOrderSummary();
+
 renderPaymentSummary();
+
