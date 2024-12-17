@@ -1,8 +1,8 @@
-export let  cart;
+export let cart;
 loadFromStorage();
 export function loadFromStorage(){
   cart = JSON.parse(localStorage.getItem('cart'));
-
+  
   if (!cart){
     cart = [{
       productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6' ,
