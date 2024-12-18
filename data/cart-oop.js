@@ -130,6 +130,3 @@ const cart = Cart('cart-oop');
 cart.loadFromStorage();
 const businessCart = Cart('cart-business');
 businessCart.loadFromStorage();
-cart.addToCart('id1', 2);
-console.log(cart);
-console.log(businessCart);
