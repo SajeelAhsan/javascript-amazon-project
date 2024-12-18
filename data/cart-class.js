@@ -1,15 +1,15 @@
 class Cart{
 
   cartItems;
-  localStorageKey;
+  #localStorageKey;
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() {
-    const storedCart = localStorage.getItem(this.localStorageKey);
+  #loadFromStorage() {
+    const storedCart = localStorage.getItem(this.#localStorageKey);
     this.cartItems = storedCart ? JSON.parse(storedCart) : null;
    //this.cartItems = JSON.parse(localStorage.getItem('cart-oop'));
    
@@ -40,7 +40,7 @@ class Cart{
    }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 //This function will allows us to add products into the cart
   addToCart(productId, quantity) {
@@ -125,7 +125,6 @@ if (matchingItem) {
    
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
-
-cart.addToCart('id1', 2);
+businessCart.addToCart('id1', 5);
 console.log(cart);
 console.log(businessCart);
