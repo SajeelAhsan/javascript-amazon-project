@@ -123,8 +123,7 @@ if (matchingItem) {
   }
 }
    
-const cart = new Cart('cart-oop');
+export const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
-businessCart.addToCart('id1', 5);
 console.log(cart);
 console.log(businessCart);
