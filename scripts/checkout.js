@@ -4,10 +4,44 @@ import { renderPaymentSummary } from "./Checkout/paymentSummary.js";
 import { loadProducts } from "../data/products.js";
 import '../data/cart-class.js' ;
 
-loadProducts(() =>{
+
+Promise.all([
+  new Promise((resolve) => {
+    loadProducts(() => {
+      resolve();
+    });
+  }).then(() => {
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+  })
+]).then(() => {
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
 });
+
+
+
+
+
+
+
+
+/*new Promise((resolve) => {
+  loadProducts(() => {
+    resolve();
+  });
+}).then(() => {
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+});
+
+/*loadProducts(() =>{
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+});*/
 
 
