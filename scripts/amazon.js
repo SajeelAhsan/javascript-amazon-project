@@ -1,8 +1,11 @@
 import { formatCurrency } from './utils/money.js';
 //import { cart} from '../data/cart-class.js';
 import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
+import { products, loadProducts } from '../data/products.js';
 
-import { products } from '../data/products.js';
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid(){
 let productsHtml= '';
 products.forEach((product)=>
 {
@@ -96,3 +99,4 @@ products.forEach((product)=>
       addedMessageTimeoutId = timeoutId; 
   });
  });
+}
